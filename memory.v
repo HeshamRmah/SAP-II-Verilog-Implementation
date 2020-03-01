@@ -12,7 +12,7 @@
 * CLK	  = clock signal
 *
 * Output : Data to MDR
-* data = Address to the RAM
+* data    = Address to the RAM
 */
 module memory (
 		inout  [07:0] data,
