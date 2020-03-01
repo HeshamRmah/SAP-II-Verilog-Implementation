@@ -15,25 +15,30 @@
 * data = Address to the RAM
 */
 module memory (
-				inout  [07:0] data,
-				input  [15:0] address,
-				input         nCE, 
-				input 		  CLK );		
+		inout  [07:0] data,
+		input  [15:0] address,
+		input         nCE, 
+		input 	      CLK );		
 	
 	parameter Zero_State     = 8'b0000_0000;
 	parameter High_Impedance = 8'bzzzz_zzzz;
-	parameter memory_size = 65536;	//65536
-    reg [7:0] memory [0:memory_size]; // 8-bits x 64K Memory Location
-	assign data = nCE? memory[address] : High_Impedance;
-integer i;
-    initial begin
+	parameter memory_size    = 65536;	
+
+	reg [7:0] memory [0:memory_size]; // 8-bits x 64K Memory Location
+
+	assign data = (nCE) ? memory[address] : High_Impedance;
+
+	integer i;
+	initial begin
 		for (i = 0; i<memory_size; i=i+1)
 			memory[i] <= i;
-    end
+	end
 	
 	always @(posedge CLK) begin
-		if(!nCE)		memory[address] <= data;
+
+		if(!nCE) memory[address] <= data;
 	end
+
 endmodule
 /***************************************************************************/
 module t_memory;
@@ -42,16 +47,20 @@ module t_memory;
 	reg  [15:0] address;
 	reg         nCE;
 	parameter High_Impedance = 8'bzzzz_zzzz;
+
 	reg [07:0]in; 
-	assign data = (!nCE)? in: High_Impedance;
+
+	assign data = (!nCE)? in : High_Impedance;
+
 	memory Memory (data,address,nCE);	
 	
 	initial begin
-			nCE = 1'b1;	address = 16'h0000;	
+		nCE = 1'b1;	address = 16'h0000;	
 	#100	nCE = 1'b1;	address = 16'h0001;	
 	#100	nCE = 1'b1;	address = 16'h0002;
 	#100	nCE = 1'b0;	address = 16'h0003;	in = 8'h20;
 	#100	nCE = 1'b0;	address = 16'h0004;	in = 8'h30;
+
 	end
 
 endmodule

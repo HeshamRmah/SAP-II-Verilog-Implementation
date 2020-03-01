@@ -18,12 +18,12 @@
 * data = data to Memory
 */
 module mdr (
-			inout [7:0] WBUS,
-			inout [7:0] data,
-			input       nLw ,
-			input		nLr,
-			input		Em,
-			input       CLK );		
+		inout [7:0] WBUS,
+		inout [7:0] data,
+		input       nLw ,
+		input	    nLr,
+		input	    Em,
+		input       CLK );		
 	
 	reg [7:0] mdrreg ;
 	
@@ -33,12 +33,15 @@ module mdr (
 	assign WBUS = Em? mdrreg : High_Impedance;
 	assign data = mdrreg;
 	
-    initial begin	mdrreg <= Zero_State;	end
+	initial begin	mdrreg <= Zero_State;	end
     
 	always @(posedge CLK) begin
-		if		(!nLw)	mdrreg <= WBUS;
+
+		if      (!nLw)	mdrreg <= WBUS;
+
 		else if (!nLr)	mdrreg <= data;
-		else			mdrreg <= mdrreg;
+
+		else            mdrreg <= mdrreg;
 	end
 	
 endmodule
@@ -49,25 +52,27 @@ module t_mdr;
 	wire [7:0] data;
 	reg         CLK;
 	reg         nLw;
-	reg			nLr;
-	reg			Em;
+	reg	    nLr;
+	reg         Em;
 	
 	reg [7:0] temp_WBUS;
 	reg [7:0] temp_data;
+
+	parameter Zero_State     = 8'b0000_0000;
+	parameter High_Impedance = 8'bzzzz_zzzz;
 	
 	assign WBUS = temp_WBUS;
 	assign data = temp_data;
 	
-	parameter Zero_State     = 8'b0000_0000;
-	parameter High_Impedance = 8'bzzzz_zzzz;
 	mdr MDR (WBUS,data,nLw,nLr,Em,CLK);	
+	
 	initial begin 
-		CLK = 0 ;
+		CLK = 1 ;
 		forever #50 CLK = ~CLK ;
 	end
 
 	initial begin 
-			nLw = 1;	nLr = 1;	Em = 0;		temp_WBUS = 8'h15;	temp_data = 8'h17;	//do nothing	
+		nLw = 1;	nLr = 1;	Em = 0;		temp_WBUS = 8'h15;	temp_data = 8'h17;	//do nothing	
 	#100	nLw = 0;	nLr = 1;	Em = 0;		temp_WBUS = 8'h25;	temp_data = 8'h27;	//load from WBUS
 	#100	nLw = 1;	nLr = 0;	Em = 0;		temp_WBUS = 8'h35;	temp_data = 8'h37;	//load form Memory
 	#100	nLw = 1;	nLr = 1;	Em = 1;		temp_WBUS = 8'h45;	temp_data = 8'h47;	//write on WBUS
