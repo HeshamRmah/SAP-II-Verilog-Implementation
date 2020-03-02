@@ -1,6 +1,8 @@
 /*
 * Module: Input Port 1
 *
+* Author's Name : mohamed sharaf
+*
 * Brief : SAP-2 has a hexadecimal keyboard encoder is connected to port 1. 
 * It allows us to enter hexadecimal instructions and data through port 1. 
 * Notice that the hexadecimal keyboard encoder sends a READY signal to bit 0 of port 2. 
