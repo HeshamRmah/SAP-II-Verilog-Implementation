@@ -6,7 +6,7 @@
 *
 * Input :
 * WBUS    = the Data from the WBUS.
-* nLm     = Enable MAR to Load WBUS data (0 = enable)
+* nLw     = Enable MAR to Load WBUS data (0 = enable)
 * CLK     = Clock
 *
 * Output :
@@ -15,7 +15,7 @@
 module mar (
 		output reg [15:0] address,
 		input      [15:0] WBUS,
-		input             nLm ,
+		input             nLw ,
 		input             CLK );		
 	
 	parameter Zero_State     = 8'b0000_0000;
@@ -28,7 +28,7 @@ module mar (
 	
 	always @(posedge CLK) begin 
 	
-		if(!nLm)	address <= WBUS;
+		if(!nLw)	address <= WBUS;
 		
 		else		address <= address;
 	end	
@@ -40,9 +40,9 @@ module t_mar;
 	wire [15:0] address;
 	reg  [15:0] WBUS;
 	reg         CLK;
-	reg         nLm;
+	reg         nLw;
 
-	mar MAR (address,WBUS,nLm,CLK);
+	mar MAR (address,WBUS,nLw,CLK);
 
 	initial begin 
 		CLK = 1 ;
@@ -50,10 +50,10 @@ module t_mar;
 	end
 
 	initial begin 
-		nLm = 1;  WBUS = 16'h1234;
-	#100	nLm = 0;  WBUS = 16'h1234;
-	#100	nLm = 0;  WBUS = 16'h1111;	
-	#100	nLm = 1;  WBUS = 16'h1234;	
+		nLw = 1;  WBUS = 16'h1234;
+	#100	nLw = 0;  WBUS = 16'h1234;
+	#100	nLw = 0;  WBUS = 16'h1111;	
+	#100	nLw = 1;  WBUS = 16'h1234;	
 		
 	end
 
