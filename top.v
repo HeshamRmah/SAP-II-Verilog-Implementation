@@ -5,10 +5,16 @@
 * File Name     : CPU Top
 *
 * Inputs of the Module :
-* CLK   = Clock
-* nCLR  = Clear (0 :clear)
+* Keyboard  = Input from Keyboard
+* CLK       = Clock
+* nCLR      = Clear (0 :clear)
+* serial_in = Input Data in Serial Form
+*
+* Output of the Module :
+* P3_out     = Output Data from Port 4
+* serial_out = Output Data in Serial Form
 */
-module top (input CLK ,nCLR,serial_in,Keyboard);
+module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK ,nCLR,serial_in);
 	
 /****************************************************************************************/	
 	wire Cp,Ep,nLp,nCE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu ;
@@ -37,13 +43,11 @@ module top (input CLK ,nCLR,serial_in,Keyboard);
 	
 	wire [7:0] mem_data;
 	
-	wire [7:0] P3_out;
-	
-	wire       serial_out,acknowedge;
+	wire       acknowedge;
 	
 	wire [15:0] pc_BUS;
 	
-	wire  [7:0] tmp_BUS,tmp_alu;
+	wire [7:0] tmp_BUS,tmp_alu;
 /************************************************************************/	
 	parameter Zero_State = 8'b0000_0000;
 	
@@ -63,8 +67,8 @@ module top (input CLK ,nCLR,serial_in,Keyboard);
 		WBUS = (Eb)  ? Breg_BUS : WBUS ;
 		WBUS = (Ec)  ? Creg_BUS : WBUS ;
 		WBUS = (Eu)  ? alu_BUS  : WBUS ;
-		WBUS = (Lo3) ? P1_BUS   : WBUS ;
-		WBUS = (Lo4) ? P2_BUS   : WBUS ;
+		WBUS = () ? P1_BUS   : WBUS ;
+		WBUS = () ? P2_BUS   : WBUS ;
 		
 	end
 	
@@ -105,9 +109,12 @@ endmodule
 /***************************************************************************/
 module t_top;
 
-	reg CLK ,nCLR ,serial_in ,Keyboard;
+	wire [7:0] P3_out;
+	wire serial_out;
+	reg [7:0] Keyboard;
+	reg CLK ,nCLR ,serial_in ;
 
-	top SAP_II (CLK,nCLR,serial_in,Keyboard);
+	top SAP_II (P3_out,serial_out,Keyboard,CLK,nCLR,serial_in);
 
 	initial begin 
 		CLK = 1 ;
