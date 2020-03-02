@@ -29,12 +29,14 @@ module input_port_2 (
 	assign WBUS = (ready)? data : High_Impedance;
 	
 	always @(posedge CLK) begin
+		
+		data[0] <= ready;
 
 		if(!nCLR) data = Zero_State;  
 		
 		else if(ready) begin 
 			data[7] = serial_in; 
-			data = data >> 1; 
+			data    = data >> 1; 
 		end
 		
 		else data = data;
