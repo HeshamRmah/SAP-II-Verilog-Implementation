@@ -11,19 +11,33 @@
  * nCLR   = Clear (0 :clear)
  * opcode = From Instruction Register
  *
- * Total Output of (12) Control Signals CON : (Can Be Changed Because this Control Signals for SAP I)
+ * Total Output of (26) Control Signals CON :
  * Cp     = Increment PC
  * Ep     = Enable PC ouput to WBUS (1 = Enable)
- * nLm    = Enable MAR to Load WBUS data (0 = enable)
- * nCE    = Enable output of RAM data to WBUS (0 = enable)
- * nLi    = Load Instruction Register from WBUS (0 = load)
- * nEi    = Enable ouput of address from Instruction Register to lower 4 bits of WBUS (0 = enable)
- * nLa    = Load data into the accumulator from WBUS (0 = load)
- * Ea     = Enable ouput of accumulator to WBUS (1 = enable)
- * Su     = ALU operation (0 = Add, 1 = Subtract)
- * Eu     = Enable output of ALU to WBUS (1 = enable)
- * nLb    = Load data into Register B from WBUS (0 = load)
- * nLo    = Load data into Output Register (0 = load) 
+ * nLp    = Enable PC output to WBUS
+ * nCE    = Enabled Memory output & input to MDR (0 write, 1 read, always Read address from MAR)
+ * Em     = Enable MDR to write on WBUS
+ * nLm    = Enable MDR to Load WBUS data   (0 = enable)
+ * Er     = Enable MDR to write to Memory
+ * nLr    = Enable MDR to Load Memory data (0 = enable)
+ * nLi    = Load IR from WBUS (8-bit). 0 = load
+ * nLa    = Load to Accumulator. (0 = Load)
+ * Ea     = Enable Accumulator to Write to WBUS
+ * nLt    = Load to Register TMP. (0 = Load)
+ * Et     = Enable TMP Register to Write to WBUS
+ * nLb    = Load to Register B. (0 = Load)
+ * Eb     = Enable B Register to Write to WBUS
+ * nLc    = Load to Register C. (0 = Load)
+ * Ec     = Enable C Register to Write to WBUS
+ * Lo3    = Load Data from WBUS into out port 3
+ * Lo4    = Load Data from WBUS into out port 4
+ * Sr     = shift register right to transfer data serially in out port 4
+ * Sel3   = ALU Selector Bit 3
+ * Sel2   = ALU Selector Bit 2
+ * Sel1   = ALU Selector Bit 1
+ * Sel0   = ALU Selector Bit 0
+ * nLw    = Enable MAR to Load WBUS data (0 = enable)
+ * Eu     = Enable ALU Output to WBUS
  */
 module control_unit (
 					output reg [11:0] CON, // All Control Signal in one Vector (Add any bits as Needed)

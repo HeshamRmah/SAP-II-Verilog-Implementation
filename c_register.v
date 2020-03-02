@@ -8,6 +8,7 @@
 * WBUS   = Data from WBUS 
 * CLK    = Clock
 * nLc    = Load to Register C. (0 = Load)
+* Ec     = Enable C Register to Write to WBUS
 *
 * Output :
 * WBUS    = Data to WBUS

@@ -7,6 +7,7 @@
 * WBUS   = Data from WBUS 
 * CLK    = Clock
 * nLt    = Load to Register TMP. (0 = Load)
+* Et     = Enable TMP Register to Write to WBUS
 *
 * Output :
 * alu     = data to ALU Unit 

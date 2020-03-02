@@ -6,7 +6,7 @@
 *
 * Input :
 * WBUS   = Data from WBUS 
-* Lo3	 = load data from bus
+* Lo3	 = Load Data from WBUS
 * CLK    = clock signal
 *
 * Output :

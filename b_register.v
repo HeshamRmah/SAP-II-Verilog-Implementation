@@ -8,6 +8,7 @@
 * WBUS   = Data from WBUS 
 * CLK    = Clock
 * nLb    = Load to Register B. (0 = Load)
+* Eb     = Enable B Register to Write to WBUS
 *
 * Output :
 * WBUS    = Data to WBUS

@@ -9,7 +9,7 @@
 * Input :
 * WBUS   = Data from WBUS
 * CLK    = Clock
-* nLi    = Load Load from WBUS (8-bit). 0 = load
+* nLi    = Load IR from WBUS (8-bit). 0 = load
 * nCLR   = Clear
 *
 * Output :
