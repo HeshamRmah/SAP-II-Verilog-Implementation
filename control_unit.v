@@ -15,7 +15,7 @@
  * Cp     = Increment PC
  * Ep     = Enable PC ouput to WBUS (1 = Enable)
  * nLp    = Enable PC output to WBUS
- * CE     = Enabled the output & input to MDR (0 write, 1 read, always Read address from MAR)
+ * CE     = Enabled the output & input to MDR (0 write, initially write data to Memory, 1 read, always Read address from MAR)
  * Em     = Enable MDR to write on WBUS
  * nLm    = Enable MDR to Load WBUS data   (0 = enable)
  * Er     = Enable MDR to write to Memory
@@ -137,19 +137,19 @@ module control_unit (
 			*/
 			case (state)
 				T01: begin
-						CON <= 28'h74D5000 ;
-					end
+						CON <= 28'h64D5000 ;
+				end
 					
 				T02: begin
 						CON <= 28'hAD55008 ;
-					end
+				end
                                 default :
 
 			case (opcode)
 				ADD_B : case (state) // 1- ADD_B
 				
 					T01: begin
-						CON <= 28'h74D5000 ;
+						CON <= 28'h64D5000;
 					end
 					
 					T02: begin

@@ -27,32 +27,32 @@ module mdr (
 		input       CLK );		
 	
 	reg [7:0] mdrreg ;
-	reg [7:0] datareg ;
+	//reg [7:0] datareg ;
 	
 	parameter Zero_State     = 8'b0000_0000;
 	parameter High_Impedance = 8'bzzzz_zzzz;
 	
 	assign WBUS = (Em) ? mdrreg  : High_Impedance;
-	assign data = (Er) ? datareg : High_Impedance;
+	assign data = (Er) ? mdrreg  : High_Impedance;
 	
 	initial begin	
 		mdrreg  <= Zero_State;
-		datareg <= Zero_State;
+		//datareg <= Zero_State;
 	end
     
 	always @(posedge CLK) begin
 
 		if (!nLr) begin 
-			mdrreg  <= mdrreg;
-			datareg <= data;
+			mdrreg  <= data;
+			//datareg <= data;
 		end
 		else if (!nLm) begin
 			mdrreg  <= WBUS;
-			datareg <= datareg;
+			//datareg <= datareg;
 		end
 		else begin            
 			mdrreg  <= mdrreg;
-			datareg <= datareg;
+			//datareg <= datareg;
 		end
 	end
 	

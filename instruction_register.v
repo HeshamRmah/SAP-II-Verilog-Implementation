@@ -32,7 +32,7 @@ module instruction_register (
     
 	assign opcode = OpReg ;
 	
-	always @(posedge CLK) begin
+	always @(negedge CLK) begin
 
 		if(!nCLR) begin
 			OpReg <= Zero_State;

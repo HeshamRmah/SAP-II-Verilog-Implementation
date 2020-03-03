@@ -49,6 +49,8 @@ module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK
 	wire [15:0] pc_BUS;
 	// TMP Register Module
 	wire [7:0] tmp_BUS,tmp_alu;
+	// Connection Between Memory and MDR
+	wire [7:0] mem_mdr;
 /************************************************************************/	
 	parameter Zero_State = 8'b0000_0000;
 	// WBUS
@@ -73,7 +75,7 @@ module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK
 	end
 	// assign all (26) Control Signals to CON Vector
 	assign {Cp,Ep,nLp,CE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu} = CON[27:2] ;
-	
+	//assign mem_mdr = (!CE)? mem_data : (Er)? mdr_data : mem_mdr;
 /*********************************************************************************/
 	// Connect all the Modules
 
@@ -95,9 +97,9 @@ module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK
 	
 	mar MAR (mar_address,WBUS,nLw,CLK );
 
-	mdr MDR (mdr_BUS,mdr_data,Em,nLm,Er,nLr,CLK );
+	mdr MDR (mdr_BUS,mem_mdr,Em,nLm,Er,nLr,CLK );
 
-	memory Memory (mem_data,mar_address,CE,CLK );
+	memory Memory (mem_mdr,mar_address,CE,CLK );
 
 	out_port_3 Out_Port_3 (P3_out,WBUS[7:0],CLK,Lo3 );
 

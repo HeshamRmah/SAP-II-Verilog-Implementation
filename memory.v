@@ -8,7 +8,7 @@
 * Input :
 * data : data from MDR
 * address = address of memory location to read or write
-* CE      = Enabled the output & input to MDR (0 write, 1 read, always Read address from MAR)
+* CE      = Enabled the output & input to MDR (0 write, initially write data to Memory, 1 read, always Read address from MAR)
 * CLK	  = clock signal
 *
 * Output : Data to MDR

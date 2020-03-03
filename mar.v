@@ -26,7 +26,7 @@ module mar (
 		address <= Zero_State;
 	end
 	
-	always @(posedge CLK) begin 
+	always @(negedge CLK) begin 
 	
 		if(!nLw)	address <= WBUS;
 		
