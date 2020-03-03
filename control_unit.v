@@ -137,6 +137,8 @@ module control_unit (
 			* NOTE : in the Last T-state for every Opcode it's Obligated to Reset the Ring Counter to state : T01 ,
 			* to start the Next Instruction without Halting the Program till the Ring Counter Complets it's Cycle
 			*/
+			nCLR_state <= 1'b1; // Remove the Clear Signal from Ring Counter
+
 			case (state)
 				T01: begin
 					CON <= 28'h64D5000 ;
@@ -152,13 +154,12 @@ module control_unit (
 						ADD_B : case (state) // 1- ADD_B
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C7008 ;
 								end
 							
 								T04: begin
-									CON   <= 0 ;
-									nCLR_state <= 1'b0;
-									nCLR_state <= 1'b1;
+									CON   <= 28'h259500C ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 
 								default: CON <= 28'h25D5008 ;
@@ -172,6 +173,7 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
 								default: CON <= 28'h25D5008 ;
@@ -185,9 +187,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						ANA_C : case (state) // 4- ANA_C
@@ -198,9 +201,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						ANI : case (state) // 5- ANI
@@ -223,9 +227,10 @@ module control_unit (
 							
 								T07: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						CALL : case (state) // 6- CALL
@@ -292,9 +297,10 @@ module control_unit (
 							
 								T18: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						CMA : case (state) // 7- CMA
@@ -305,9 +311,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						DCR_A : case (state) // 8- DCR_A
@@ -318,9 +325,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						DCR_B : case (state) // 9- DCR_B
@@ -331,9 +339,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						DCR_C : case (state) // 10- DCR_C
@@ -344,9 +353,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						HLT : case (state) // 11- HLT
@@ -361,9 +371,10 @@ module control_unit (
 							
 								T05: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						IN : case (state) // 12- IN
@@ -398,9 +409,10 @@ module control_unit (
 							
 								T10: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						INR_A : case (state) // 13- INR_A
@@ -411,9 +423,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						INR_B : case (state) // 14-INR_B
@@ -424,9 +437,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						INR_C : case (state) // 15- INR_C
@@ -437,9 +451,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						JM : case (state) // 16- JM
@@ -474,9 +489,10 @@ module control_unit (
 							
 								T10: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						JMP : case (state) // 17- JMP
@@ -511,9 +527,10 @@ module control_unit (
 							
 								T10: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						JNZ : case (state) // 18- JNZ
@@ -548,9 +565,10 @@ module control_unit (
 							
 								T10: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						JZ : case (state) // 19- JZ
@@ -585,9 +603,10 @@ module control_unit (
 							
 								T10: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						LDA : case (state) // 20- LDA
@@ -634,8 +653,9 @@ module control_unit (
 							
 								T13: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						MOV_A_B : case (state) // 21- MOV_A_B
@@ -646,9 +666,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						MOV_A_C : case (state) // 22- MOV_A_C
@@ -659,9 +680,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						MOV_B_A : case (state) // 23- MOV_B_A
@@ -672,9 +694,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						MOV_B_C : case (state) // 24- MOV_B_C
@@ -685,9 +708,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						MOV_C_A : case (state) // 25- MOV_C_A
@@ -698,9 +722,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						MOV_C_B : case (state) // 26- MOV_C_B
@@ -711,9 +736,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						MVI_A : case (state) // 27- MVI_A
@@ -736,9 +762,10 @@ module control_unit (
 							
 								T07: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						MVI_B : case (state) // 28- MVI_B
@@ -761,9 +788,10 @@ module control_unit (
 							
 								T07: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						MVI_C : case (state) // 29- MVI_C
@@ -786,9 +814,10 @@ module control_unit (
 							
 								T07: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						NOP : case (state) // 30- NOP
@@ -799,9 +828,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						ORA_B : case (state) // 31- ORA_B
@@ -812,9 +842,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						ORA_C : case (state) // 32- ORA_C
@@ -825,9 +856,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						ORI : case (state) // 33- ORI
@@ -850,9 +882,10 @@ module control_unit (
 							
 								T07: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						OUT : case (state) // 34- OUT
@@ -887,9 +920,10 @@ module control_unit (
 							
 								T10: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						RAL : case (state) // 35- RAL
@@ -900,9 +934,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						RAR : case (state) // 36- RAR
@@ -913,9 +948,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						RET : case (state) // 37- RET
@@ -950,9 +986,10 @@ module control_unit (
 							
 								T10: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						STA : case (state) // 38- STA
@@ -999,9 +1036,10 @@ module control_unit (
 							
 								T13: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						SUB_B : case (state) // 39- SUB_B
@@ -1012,9 +1050,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						SUB_C : case (state) // 40- SUB_C
@@ -1025,9 +1064,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						XRA_B : case (state) // 41- XRA_B
@@ -1038,9 +1078,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						XRA_C : case (state) // 42- XRA_C
@@ -1051,9 +1092,10 @@ module control_unit (
 							
 								T04: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 							
 						XRI : case (state) // 43- XRI
@@ -1076,9 +1118,10 @@ module control_unit (
 							
 								T07: begin
 									CON <= 0 ;
+									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: ;
+								default: CON <= 28'h25D5008 ;
 							endcase
 				
 				
