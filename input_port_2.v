@@ -26,20 +26,20 @@ module input_port_2 (
 		data <= Zero_State;
 	end
 	
-	assign WBUS = (ready)? data : High_Impedance;
+	assign WBUS = (ready)? data : High_Impedance;  //data_to_bus_with_enable
 	
 	always @(posedge CLK) begin
 		
-		data[0] <= ready;
+		data[0] <= ready;            // store_input_from_ready_into_data_register
 
-		if(!nCLR) data = Zero_State;  
+		if(!nCLR) data = Zero_State; // clear_condition
 		
-		else if(ready) begin 
+		else if(ready) begin         // load_data_and_shift
 			data[7] = serial_in; 
 			data    = data >> 1; 
 		end
 		
-		else data = data;
+		else data = data;            // general
 		
 	end
 
