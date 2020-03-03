@@ -137,1295 +137,952 @@ module control_unit (
 			*/
 			case (state)
 				T01: begin
-						CON <= 28'h64D5000 ;
+					CON <= 28'h64D5000 ;
 				end
 					
 				T02: begin
-						CON <= 28'hAD55008 ;
+					CON <= 28'hAD55008 ;
 				end
-                                default :
 
-			case (opcode)
-				ADD_B : case (state) // 1- ADD_B
-				
-					T01: begin
-						CON <= 28'h64D5000;
-					end
-					
-					T02: begin
-						CON <= 28'hAD55008 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON   <= 0 ;
-						nCLR_state <= 1'b0;
-						nCLR_state <= 1'b1;
-					end
+				default :
 
-					default: CON <= 28'h25D5008 ;
-				endcase
-				
-				ADD_C : case (state) // 2- ADD_C
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: CON <= 28'h25D5008 ;
-				endcase
-				
-				ANA_B : case (state) // 3- ANA_B
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
+					case (opcode)
+						ADD_B : case (state) // 1- ADD_B
 
-					default: ;
-				endcase
-				
-				ANA_C : case (state) // 4- ANA_C
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					default: ;
-				endcase
-				
-				ANI : case (state) // 5- ANI
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					default: ;
-				endcase
-				
-				CALL : case (state) // 6- CALL
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					T08: begin
-						CON <= 0 ;
-					end
-				
-					T09: begin
-						CON <= 0 ;
-					end
-				
-					T10: begin
-						CON <= 0 ;
-					end
-				
-					T11: begin
-						CON <= 0 ;
-					end
-				
-					T12: begin
-						CON <= 0 ;
-					end
-				
-					T13: begin
-						CON <= 0 ;
-					end
-				
-					T14: begin
-						CON <= 0 ;
-					end
-				
-					T15: begin
-						CON <= 0 ;
-					end
-				
-					T16: begin
-						CON <= 0 ;
-					end
-				
-					T17: begin
-						CON <= 0 ;
-					end
-				
-					T18: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				CMA : case (state) // 7- CMA
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					default: ;
-				endcase
-				
-				DCR_A : case (state) // 8- DCR_A
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				DCR_B : case (state) // 9- DCR_B
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				DCR_C : case (state) // 10- DCR_C
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				HLT : case (state) // 11- HLT
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				IN : case (state) // 12- IN
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					T08: begin
-						CON <= 0 ;
-					end
-				
-					T09: begin
-						CON <= 0 ;
-					end
-				
-					T10: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				INR_A : case (state) // 13- INR_A
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				INR_B : case (state) // 14-INR_B
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				INR_C : case (state) // 15- INR_C
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				JM : case (state) // 16- JM
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					T08: begin
-						CON <= 0 ;
-					end
-				
-					T09: begin
-						CON <= 0 ;
-					end
-				
-					T10: begin
-						CON <= 0 ;
-					end
-				
-					default: ;
-				endcase
-				
-				JMP : case (state) // 17- JMP
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					T08: begin
-						CON <= 0 ;
-					end
-				
-					T09: begin
-						CON <= 0 ;
-					end
-				
-					T10: begin
-						CON <= 0 ;
-					end
-				
-					default: ;
-				endcase
-				
-				JNZ : case (state) // 18- JNZ
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					T08: begin
-						CON <= 0 ;
-					end
-				
-					T09: begin
-						CON <= 0 ;
-					end
-				
-					T10: begin
-						CON <= 0 ;
-					end
-				
-					default: ;
-				endcase
-				
-				JZ : case (state) // 19- JZ
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					T08: begin
-						CON <= 0 ;
-					end
-				
-					T09: begin
-						CON <= 0 ;
-					end
-				
-					T10: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				LDA : case (state) // 20- LDA
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					T08: begin
-						CON <= 0 ;
-					end
-				
-					T09: begin
-						CON <= 0 ;
-					end
-				
-					T10: begin
-						CON <= 0 ;
-					end
-				
-					T11: begin
-						CON <= 0 ;
-					end
-				
-					T12: begin
-						CON <= 0 ;
-					end
-				
-					T13: begin
-						CON <= 0 ;
-					end
-					default: ;
-				endcase
-				
-				MOV_A_B : case (state) // 21- MOV_A_B
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					default: ;
-				endcase
-				
-				MOV_A_C : case (state) // 22- MOV_A_C
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				MOV_B_A : case (state) // 23- MOV_B_A
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				MOV_B_C : case (state) // 24- MOV_B_C
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				MOV_C_A : case (state) // 25- MOV_C_A
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				MOV_C_B : case (state) // 26- MOV_C_B
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				MVI_A : case (state) // 27- MVI_A
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON   <= 0 ;
+									nCLR_state <= 1'b0;
+									nCLR_state <= 1'b1;
+								end
 
-					default: ;
-				endcase
-				
-				MVI_B : case (state) // 28- MVI_B
-				
-					T01: begin
-						CON <= 0 ;
-					end
+								default: CON <= 28'h25D5008 ;
+						endcase
 					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					default: ;
-				endcase
-				
-				MVI_C : case (state) // 29- MVI_C
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					default: ;
-				endcase
-				
-				NOP : case (state) // 30- NOP
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					default: ;
-				endcase
-				
-				ORA_B : case (state) // 31- ORA_B
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					default: ;
-				endcase
-				
-				ORA_C : case (state) // 32- ORA_C
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					default: ;
-				endcase
-				
-				ORI : case (state) // 33- ORI
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				OUT : case (state) // 34- OUT
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					T08: begin
-						CON <= 0 ;
-					end
-				
-					T09: begin
-						CON <= 0 ;
-					end
-				
-					T10: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				RAL : case (state) // 35- RAL
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				RAR : case (state) // 36- RAR
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				RET : case (state) // 37- RET
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					T08: begin
-						CON <= 0 ;
-					end
-				
-					T09: begin
-						CON <= 0 ;
-					end
-				
-					T10: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				STA : case (state) // 38- STA
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-				
-					T08: begin
-						CON <= 0 ;
-					end
-				
-					T09: begin
-						CON <= 0 ;
-					end
-				
-					T10: begin
-						CON <= 0 ;
-					end
-				
-					T11: begin
-						CON <= 0 ;
-					end
-				
-					T12: begin
-						CON <= 0 ;
-					end
-				
-					T13: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				SUB_B : case (state) // 39- SUB_B
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				SUB_C : case (state) // 40- SUB_C
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				XRA_B : case (state) // 41- XRA_B
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				XRA_C : case (state) // 42- XRA_C
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				XRI : case (state) // 43- XRI
-				
-					T01: begin
-						CON <= 0 ;
-					end
-					
-					T02: begin
-						CON <= 0 ;
-					end
-				
-					T03: begin
-						CON <= 0 ;
-					end
-				
-					T04: begin
-						CON <= 0 ;
-					end
-                
-					T05: begin
-						CON <= 0 ;
-					end
-				
-					T06: begin
-						CON <= 0 ;
-					end
-				
-					T07: begin
-						CON <= 0 ;
-					end
-					
-					default: ;
-				endcase
-				
-				
-                default: CON <= 28'h25D5008 ;
-            endcase
-	endcase ///////////
+						ADD_C : case (state) // 2- ADD_C
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: CON <= 28'h25D5008 ;
+							endcase
+							
+						ANA_B : case (state) // 3- ANA_B
+							
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+
+								default: ;
+							endcase
+							
+						ANA_C : case (state) // 4- ANA_C
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						ANI : case (state) // 5- ANI
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						CALL : case (state) // 6- CALL
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								T08: begin
+									CON <= 0 ;
+								end
+							
+								T09: begin
+									CON <= 0 ;
+								end
+							
+								T10: begin
+									CON <= 0 ;
+								end
+							
+								T11: begin
+									CON <= 0 ;
+								end
+							
+								T12: begin
+									CON <= 0 ;
+								end
+							
+								T13: begin
+									CON <= 0 ;
+								end
+							
+								T14: begin
+									CON <= 0 ;
+								end
+							
+								T15: begin
+									CON <= 0 ;
+								end
+							
+								T16: begin
+									CON <= 0 ;
+								end
+							
+								T17: begin
+									CON <= 0 ;
+								end
+							
+								T18: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						CMA : case (state) // 7- CMA
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						DCR_A : case (state) // 8- DCR_A
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						DCR_B : case (state) // 9- DCR_B
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						DCR_C : case (state) // 10- DCR_C
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						HLT : case (state) // 11- HLT
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						IN : case (state) // 12- IN
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								T08: begin
+									CON <= 0 ;
+								end
+							
+								T09: begin
+									CON <= 0 ;
+								end
+							
+								T10: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						INR_A : case (state) // 13- INR_A
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						INR_B : case (state) // 14-INR_B
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						INR_C : case (state) // 15- INR_C
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						JM : case (state) // 16- JM
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								T08: begin
+									CON <= 0 ;
+								end
+							
+								T09: begin
+									CON <= 0 ;
+								end
+							
+								T10: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						JMP : case (state) // 17- JMP
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								T08: begin
+									CON <= 0 ;
+								end
+							
+								T09: begin
+									CON <= 0 ;
+								end
+							
+								T10: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						JNZ : case (state) // 18- JNZ
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								T08: begin
+									CON <= 0 ;
+								end
+							
+								T09: begin
+									CON <= 0 ;
+								end
+							
+								T10: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						JZ : case (state) // 19- JZ
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								T08: begin
+									CON <= 0 ;
+								end
+							
+								T09: begin
+									CON <= 0 ;
+								end
+							
+								T10: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						LDA : case (state) // 20- LDA
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								T08: begin
+									CON <= 0 ;
+								end
+							
+								T09: begin
+									CON <= 0 ;
+								end
+							
+								T10: begin
+									CON <= 0 ;
+								end
+							
+								T11: begin
+									CON <= 0 ;
+								end
+							
+								T12: begin
+									CON <= 0 ;
+								end
+							
+								T13: begin
+									CON <= 0 ;
+								end
+								default: ;
+							endcase
+							
+						MOV_A_B : case (state) // 21- MOV_A_B
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						MOV_A_C : case (state) // 22- MOV_A_C
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						MOV_B_A : case (state) // 23- MOV_B_A
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						MOV_B_C : case (state) // 24- MOV_B_C
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						MOV_C_A : case (state) // 25- MOV_C_A
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						MOV_C_B : case (state) // 26- MOV_C_B
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						MVI_A : case (state) // 27- MVI_A
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+
+								default: ;
+							endcase
+							
+						MVI_B : case (state) // 28- MVI_B
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						MVI_C : case (state) // 29- MVI_C
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						NOP : case (state) // 30- NOP
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						ORA_B : case (state) // 31- ORA_B
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						ORA_C : case (state) // 32- ORA_C
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								default: ;
+							endcase
+							
+						ORI : case (state) // 33- ORI
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						OUT : case (state) // 34- OUT
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								T08: begin
+									CON <= 0 ;
+								end
+							
+								T09: begin
+									CON <= 0 ;
+								end
+							
+								T10: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						RAL : case (state) // 35- RAL
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						RAR : case (state) // 36- RAR
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						RET : case (state) // 37- RET
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								T08: begin
+									CON <= 0 ;
+								end
+							
+								T09: begin
+									CON <= 0 ;
+								end
+							
+								T10: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						STA : case (state) // 38- STA
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+							
+								T08: begin
+									CON <= 0 ;
+								end
+							
+								T09: begin
+									CON <= 0 ;
+								end
+							
+								T10: begin
+									CON <= 0 ;
+								end
+							
+								T11: begin
+									CON <= 0 ;
+								end
+							
+								T12: begin
+									CON <= 0 ;
+								end
+							
+								T13: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						SUB_B : case (state) // 39- SUB_B
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						SUB_C : case (state) // 40- SUB_C
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						XRA_B : case (state) // 41- XRA_B
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						XRA_C : case (state) // 42- XRA_C
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+							
+						XRI : case (state) // 43- XRI
+
+								T03: begin
+									CON <= 0 ;
+								end
+							
+								T04: begin
+									CON <= 0 ;
+								end
+							
+								T05: begin
+									CON <= 0 ;
+								end
+							
+								T06: begin
+									CON <= 0 ;
+								end
+							
+								T07: begin
+									CON <= 0 ;
+								end
+								
+								default: ;
+							endcase
+				
+				
+						default: CON <= 28'h25D5008 ;
+					endcase
+			endcase
 			
         end
     end

@@ -21,7 +21,7 @@ module input_port_1 (
 			output [7:0] WBUS,
 			output reg   ready,
 			input  [7:0] Keyboard,
-			input        /*E,*/acknowedge,CLK,nCLR  );
+			input        Ei1,acknowedge,CLK,nCLR  );
 
 	parameter High_Impedance = 8'bzzzz_zzzz;
 	parameter Zero_State     = 8'b0000_0000;
@@ -32,7 +32,7 @@ module input_port_1 (
 		data <= Zero_State;
 	end
 	
-	assign WBUS = (~acknowedge)? data : High_Impedance; //data_to_bus_with_enable
+	assign WBUS = (Ei1)? data : High_Impedance; //data_to_bus_with_enable
 	
 	always@(posedge CLK) begin
 	
@@ -53,17 +53,17 @@ module t_input_port_1 ;
 	wire [7:0] WBUS;
 	wire       ready;
 	reg  [7:0] Keyboard;
-	reg        acknowedge,CLK,nCLR;
+	reg        Ei1,acknowedge,CLK,nCLR;
 
-	input_port_1 Input_Port_1 (WBUS,ready,Keyboard,acknowedge,CLK,nCLR);
+	input_port_1 Input_Port_1 (WBUS,ready,Keyboard,Ei1,acknowedge,CLK,nCLR);
 	
 	initial begin CLK =1; forever #50 CLK=~CLK; end 
 
 	initial begin 
 		
-	     nCLR = 0; acknowedge = 0;/*  E=1; */ Keyboard = 8'hac;
-	#100 nCLR = 1; acknowedge = 1;/*  E=0; */ Keyboard = 8'hac; 
-	#100 nCLR = 1; acknowedge = 0;/*  E=1; */ Keyboard = 8'hab; 
+	     nCLR = 0; acknowedge = 0;  Ei1 = 0;  Keyboard = 8'hac;
+	#100 nCLR = 1; acknowedge = 1;  Ei1 = 0;  Keyboard = 8'hac; 
+	#100 nCLR = 1; acknowedge = 0;  Ei1 = 1;  Keyboard = 8'hab; 
 		
 	end
 

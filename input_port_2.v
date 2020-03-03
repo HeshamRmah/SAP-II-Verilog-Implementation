@@ -15,7 +15,7 @@
 module input_port_2 (
 			output [7:0] WBUS,
 			input        ready,
-			input        serial_in,CLK,nCLR );
+			input        Ei2,serial_in,CLK,nCLR );
 
 	parameter High_Impedance = 8'bzzzz_zzzz;
 	parameter Zero_State     = 8'b0000_0000;
@@ -26,7 +26,7 @@ module input_port_2 (
 		data <= Zero_State;
 	end
 	
-	assign WBUS = (ready)? data : High_Impedance;  //data_to_bus_with_enable
+	assign WBUS = (Ei2)? data : High_Impedance;  //data_to_bus_with_enable
 	
 	always @(posedge CLK) begin
 		
@@ -49,20 +49,20 @@ module t_input_port_2 ;
 
 	wire [7:0] WBUS;
 	reg        ready;
-	reg        serial_in,CLK,nCLR;
+	reg        Ei2,serial_in,CLK,nCLR;
 
-	input_port_2 Input_Port_2 (WBUS,ready,serial_in,CLK,nCLR);
+	input_port_2 Input_Port_2 (WBUS,ready,Ei2,serial_in,CLK,nCLR);
 	
 	initial begin CLK=1; forever #50 CLK=~CLK; end 
 
 	initial begin 
 		
-	     nCLR = 0; ready = 0; serial_in = 1'b0;
-	#100 nCLR = 1; ready = 1; serial_in = 1'b1;
-	#100 nCLR = 1; ready = 1; serial_in = 1'b1;
-	#100 nCLR = 1; ready = 1; serial_in = 1'b0;	
-	#100 nCLR = 1; ready = 1; serial_in = 1'b1;
-	#100 nCLR = 1; ready = 0; serial_in = 1'b0;
+	     nCLR = 0; ready = 0; Ei2 = 0; serial_in = 1'b0;
+	#100 nCLR = 1; ready = 1; Ei2 = 1; serial_in = 1'b1;
+	#100 nCLR = 1; ready = 1; Ei2 = 1; serial_in = 1'b1;
+	#100 nCLR = 1; ready = 1; Ei2 = 1; serial_in = 1'b0;	
+	#100 nCLR = 1; ready = 1; Ei2 = 1; serial_in = 1'b1;
+	#100 nCLR = 1; ready = 0; Ei2 = 1; serial_in = 1'b0;
 		
 	end
 
