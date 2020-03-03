@@ -61,7 +61,7 @@ module t_input_port_1 ;
 
 	initial begin 
 		
-		 nCLR = 0; acknowedge = 0;/*  E=1; */ Keyboard = 8'hac;
+	     nCLR = 0; acknowedge = 0;/*  E=1; */ Keyboard = 8'hac;
 	#100 nCLR = 1; acknowedge = 1;/*  E=0; */ Keyboard = 8'hac; 
 	#100 nCLR = 1; acknowedge = 0;/*  E=1; */ Keyboard = 8'hab; 
 		

@@ -42,8 +42,10 @@ module ring_counter (
     
     always @(posedge CLK) begin
 	
-        if(!nCLR) state <= T01;
-		
+        if(!nCLR) begin
+		state <= T01;
+	end
+
         else
             case(state)
 			

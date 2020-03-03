@@ -8,7 +8,7 @@
 * Input :
 * data : data from MDR
 * address = address of memory location to read or write
-* nCE     = Enabled the output & input to MDR (0 write, 1 read, always Read address from MAR)
+* CE      = Enabled the output & input to MDR (0 write, 1 read, always Read address from MAR)
 * CLK	  = clock signal
 *
 * Output : Data to MDR
@@ -17,7 +17,7 @@
 module memory (
 		inout  [07:0] data,
 		input  [15:0] address,
-		input         nCE, 
+		input         CE, 
 		input 	      CLK );		
 	
 	parameter Zero_State     = 8'b0000_0000;
@@ -26,17 +26,19 @@ module memory (
 
 	reg [7:0] memory [0:memory_size]; // 8-bits x 64K Memory Location
 
-	assign data = (nCE) ? memory[address] : High_Impedance;
+	assign data = (!CE) ? memory[address] : High_Impedance;
 
 	integer i;
 	initial begin
-		for (i = 0; i<memory_size; i=i+1)
+		for (i = 1; i <= memory_size; i=i+1)
 			memory[i] <= i;
+		
+		memory[0] <= 8'b1000_0000;
 	end
 	
 	always @(posedge CLK) begin
 
-		if(!nCE) memory[address] <= data;
+		if(CE) memory[address] <= data;
 	end
 
 endmodule
@@ -45,21 +47,27 @@ module t_memory;
 
 	wire [07:0] data;
 	reg  [15:0] address;
-	reg         nCE;
+	reg         CE,CLK;
+
 	parameter High_Impedance = 8'bzzzz_zzzz;
 
-	reg [07:0]in; 
+	reg [07:0] in; 
 
-	assign data = (!nCE)? in : High_Impedance;
+	assign data = (CE)? in : High_Impedance;
 
-	memory Memory (data,address,nCE);	
+	memory Memory (data,address,CE,CLK);	
+
+	initial begin 
+		CLK = 1 ;
+		forever #50 CLK = ~CLK ;
+	end
 	
 	initial begin
-		nCE = 1'b1;	address = 16'h0000;	
-	#100	nCE = 1'b1;	address = 16'h0001;	
-	#100	nCE = 1'b1;	address = 16'h0002;
-	#100	nCE = 1'b0;	address = 16'h0003;	in = 8'h20;
-	#100	nCE = 1'b0;	address = 16'h0004;	in = 8'h30;
+		CE = 1'b0;	address = 16'h0000;	
+	#100	CE = 1'b0;	address = 16'h0001;	
+	#100	CE = 1'b0;	address = 16'h0002;
+	#100	CE = 1'b1;	address = 16'h0003;	in = 8'h20;
+	#100	CE = 1'b1;	address = 16'h0004;	in = 8'h30;
 
 	end
 

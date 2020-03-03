@@ -17,42 +17,42 @@
 module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK ,nCLR,serial_in);
 	
 /****************************************************************************************/	
-	wire Cp,Ep,nLp,nCE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu ;
-
+	// (26) Control Signals 
+	wire Cp,Ep,nLp,CE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu ;
+	// Accumulator Module
 	wire  [7:0] acc_BUS,acc_alu;
-	
+	// ALU Module
 	wire [7:0]  alu_BUS;
 	wire [1:0]  alu_flags;
-	
+	// B Register Module
 	wire [7:0] Breg_BUS;
-	
+	// C Register Module
 	wire [7:0] Creg_BUS;
-	
+	// Control Unit Module
 	wire [27:0] CON;
-	
+	// input Port 1 Module
 	wire [7:0] P1_BUS;
 	wire       ready;
-	
+	// input Port 2 Module
 	wire [7:0] P2_BUS;
-	
+	// Instruction Register Module
 	wire [7:0] opcode;
-	
+	// MAR Module
 	wire [15:0] mar_address;
-	
-	wire [7:0] mdr_BUS,mdr_data;
-	
+	// MDR Module
+	wire [7:0]  mdr_BUS,mdr_data;
+	// Memory Module
 	wire [7:0] mem_data;
-	
+	// Output Port 4 Module
 	wire       acknowedge;
-	
+	// Program Counter Module
 	wire [15:0] pc_BUS;
-	
+	// TMP Register Module
 	wire [7:0] tmp_BUS,tmp_alu;
 /************************************************************************/	
 	parameter Zero_State = 8'b0000_0000;
-	
-	reg  [15:0] WBUS;
-	
+	// WBUS
+	reg  [15:0] WBUS; 
 	initial begin
 		WBUS <= Zero_State;
 	end
@@ -61,20 +61,22 @@ module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK
 	
 		// assign the WBUS Register Depending on Control Signals
 		WBUS = (Ep)  ? pc_BUS   : WBUS ;
-		WBUS = (Ea)  ? acc_BUS  : WBUS ;
-		WBUS = (Em)  ? mdr_BUS  : WBUS ;
-		WBUS = (Et)  ? tmp_BUS  : WBUS ;
-		WBUS = (Eb)  ? Breg_BUS : WBUS ;
-		WBUS = (Ec)  ? Creg_BUS : WBUS ;
-		WBUS = (Eu)  ? alu_BUS  : WBUS ;
-		WBUS = () ? P1_BUS   : WBUS ;
-		WBUS = () ? P2_BUS   : WBUS ;
+		WBUS = (Ea)  ? acc_BUS  : WBUS [7:0];
+		WBUS = (Em)  ? mdr_BUS  : WBUS [7:0];
+		WBUS = (Et)  ? tmp_BUS  : WBUS [7:0];
+		WBUS = (Eb)  ? Breg_BUS : WBUS [7:0];
+		WBUS = (Ec)  ? Creg_BUS : WBUS [7:0];
+		WBUS = (Eu)  ? alu_BUS  : WBUS [7:0];
+		WBUS = (0) ? P1_BUS : WBUS [7:0];
+		WBUS = (0) ? P2_BUS : WBUS [7:0];
 		
 	end
-	
-	assign {Cp,Ep,nLp,nCE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu} = CON[27:2] ;
+	// assign all (26) Control Signals to CON Vector
+	assign {Cp,Ep,nLp,CE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu} = CON[27:2] ;
 	
 /*********************************************************************************/
+	// Connect all the Modules
+
 	accumulator Accumulator (acc_BUS,acc_alu,CLK,nLa,Ea );
 	
 	alu ALU (alu_BUS,alu_flags,acc_alu,tmp_alu,{Sel3,Sel2,Sel1,Sel0},Eu );
@@ -85,21 +87,21 @@ module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK
 
 	control_unit Controller (CON,CLK,nCLR,opcode );
 
-	input_port_1 Input_Port_1 (P1_BUS,ready,Keyboard,acknowedge );
+	input_port_1 Input_Port_1 (P1_BUS,ready,Keyboard,acknowedge,CLK,nCLR );
 
-	input_port_2 Input_Port_2 (P2_BUS,ready,serial_in );
+	input_port_2 Input_Port_2 (P2_BUS,ready,serial_in,CLK,nCLR );
 
-	instruction_register IR (opcode,WBUS,CLK,nLi,nCLR );
+	instruction_register IR (opcode,WBUS[7:0],CLK,nLi,nCLR );
 	
 	mar MAR (mar_address,WBUS,nLw,CLK );
 
 	mdr MDR (mdr_BUS,mdr_data,Em,nLm,Er,nLr,CLK );
 
-	memory Memory (mem_data,mar_address,nCE,CLK );
+	memory Memory (mem_data,mar_address,CE,CLK );
 
-	out_port_3 Out_Port_3 (P3_out,WBUS,CLK,Lo3 );
+	out_port_3 Out_Port_3 (P3_out,WBUS[7:0],CLK,Lo3 );
 
-	out_port_4 Out_Port_4 (serial_out,acknowedge,WBUS,CLK,Lo4,Sr);
+	out_port_4 Out_Port_4 (serial_out,acknowedge,WBUS[7:0],CLK,Lo4,Sr);
 
 	program_counter PC (pc_BUS,Cp,Ep,nLp,CLK,nCLR);
 
@@ -123,7 +125,7 @@ module t_top;
 
 	initial begin 
 
-			 nCLR = 0 ;
+		     nCLR = 0 ;
 		#100 nCLR = 1 ;
 
 	end
