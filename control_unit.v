@@ -11,7 +11,7 @@
  * nCLR   = Clear (0 :clear)
  * opcode = From Instruction Register
  *
- * Total Output of (26) Control Signals CON :
+ * Total Output of (28) Control Signals CON :
  * Cp     = Increment PC
  * Ep     = Enable PC ouput to WBUS (1 = Enable)
  * nLp    = Enable PC output to WBUS
@@ -38,6 +38,8 @@
  * Sel0   = ALU Selector Bit 0
  * nLw    = Enable MAR to Load WBUS data (0 = enable)
  * Eu     = Enable ALU Output to WBUS
+ * Ei1    = Enable Input Port 1 Output to WBUS
+ * Ei2    = Enable Input Port 2 Output to WBUS
  */
 module control_unit (
 			output reg [27:0] CON, // All Control Signal in one Vector (Add any bits as Needed)

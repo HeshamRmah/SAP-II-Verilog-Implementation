@@ -5,6 +5,7 @@
 *
 * Input :
 * ready     = Received Ready Signal from Input Port 1
+* Ei2        = Enable Input Port 2 Output to WBUS
 * serial_in = input Data in Serial form
 * CLK       = Clock
 * nCLR      = Clear (0 :clear)

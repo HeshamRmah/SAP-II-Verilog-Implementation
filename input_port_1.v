@@ -9,6 +9,7 @@
 *
 * Input :
 * Keyboard   = Data fron Hexadecimal Keyboard Encoder
+* Ei1        = Enable Input Port 1 Output to WBUS
 * acknowedge = acknowedge Signal
 * CLK        = Clock
 * nCLR       = Clear (0 :clear)

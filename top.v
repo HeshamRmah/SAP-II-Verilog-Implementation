@@ -17,8 +17,8 @@
 module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK ,nCLR,serial_in);
 	
 /****************************************************************************************/	
-	// (26) Control Signals 
-	wire Cp,Ep,nLp,CE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu ;
+	// (28) Control Signals 
+	wire Cp,Ep,nLp,CE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu,Ei1,Ei2 ;
 	// Accumulator Module
 	wire  [7:0] acc_BUS,acc_alu;
 	// ALU Module
@@ -40,9 +40,9 @@ module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK
 	// MAR Module
 	wire [15:0] mar_address;
 	// MDR Module
-	wire [7:0]  mdr_BUS,mdr_data;
+	wire [7:0]  mdr_BUS;
 	// Memory Module
-	wire [7:0] mem_data;
+	
 	// Output Port 4 Module
 	wire       acknowedge;
 	// Program Counter Module
@@ -69,13 +69,13 @@ module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK
 		WBUS = (Eb)  ? Breg_BUS : WBUS [7:0];
 		WBUS = (Ec)  ? Creg_BUS : WBUS [7:0];
 		WBUS = (Eu)  ? alu_BUS  : WBUS [7:0];
-		WBUS = (0) ? P1_BUS : WBUS [7:0];
-		WBUS = (0) ? P2_BUS : WBUS [7:0];
+		WBUS = (Ei1) ? P1_BUS   : WBUS [7:0];
+		WBUS = (Ei2) ? P2_BUS   : WBUS [7:0];
 		
 	end
 	// assign all (26) Control Signals to CON Vector
-	assign {Cp,Ep,nLp,CE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu} = CON[27:2] ;
-	//assign mem_mdr = (!CE)? mem_data : (Er)? mdr_data : mem_mdr;
+	assign {Cp,Ep,nLp,CE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu,Ei1,Ei2} = CON[27:0] ;
+	
 /*********************************************************************************/
 	// Connect all the Modules
 
@@ -89,9 +89,9 @@ module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK
 
 	control_unit Controller (CON,CLK,nCLR,opcode );
 
-	input_port_1 Input_Port_1 (P1_BUS,ready,Keyboard,acknowedge,CLK,nCLR );
+	input_port_1 Input_Port_1 (P1_BUS,ready,Keyboard,Ei1,acknowedge,CLK,nCLR );
 
-	input_port_2 Input_Port_2 (P2_BUS,ready,serial_in,CLK,nCLR );
+	input_port_2 Input_Port_2 (P2_BUS,ready,Ei1,serial_in,CLK,nCLR );
 
 	instruction_register IR (opcode,WBUS[7:0],CLK,nLi,nCLR );
 	
