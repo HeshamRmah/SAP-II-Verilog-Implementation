@@ -15,7 +15,7 @@
 * Output :
 * WBUS   = Data to WBUS.
 * flags  = zero & sign Flags  (flags[0] = Zero Flag )(flags[1] = Sign Flag)
-* sel [3] -> 1 if the operation dosnt effect on flags
+* sel [3] -> 1 if the operation does not affect the flags
 */
 module alu (
 		output [7:0]  WBUS,
@@ -35,6 +35,7 @@ module alu (
 	parameter DCR  = 4'b0100;
 	parameter INC  = 4'b0101;
 	parameter XOR  = 4'b0110;
+	parameter CMA  = 4'b1101;
 	parameter RAL  = 4'b1110;
 	parameter RAR  = 4'b1111;
 			
@@ -46,7 +47,7 @@ module alu (
 
 	assign flags[0] = Sel[3]? flags[0] : ((result == 0)? 1 : 0 );    // Zero Flag 
 	assign flags[1] = Sel[3]? flags[1] : ((result[7]== 1)? 1 : 0) ;  // Sign Flag 
-	
+
 	assign WBUS = (Eu) ? result : High_Impedance ;     // DATA tO WBUS IF ENABLE 
 
 	always @(*)
@@ -59,6 +60,7 @@ module alu (
 			DCR : result  <= tmp - 1 ;                          // dcr x , 
 			INC : result  <= tmp + 1 ;                          // inc x , 
 			XOR : result  <= accumulator ^ tmp ;                // xor x ,  xori 
+			CMA : result  <= ~ accumulator ;                    // Complement A 
 			RAL : result  <= {accumulator[6:0],accumulator[7]}; // ral 
 			RAR : result  <= {accumulator[0],accumulator[7:1]}; // rar
 		

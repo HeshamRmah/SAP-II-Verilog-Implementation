@@ -30,11 +30,14 @@ module memory (
 
 	integer i;
 	initial begin
-		for (i = 2; i <= memory_size; i=i+1)
+		for (i = 5; i <= memory_size; i=i+1)
 			memory[i] <= i;
 		
 		memory[0] <= 8'b1000_0000;
-		memory[1] <= 8'b1000_0000;
+		memory[1] <= 8'b1001_0001;
+		memory[2] <= 8'b1001_0000;
+		memory[3] <= 8'b1010_1000;
+		memory[4] <= 8'b1010_1001;
 	end
 	
 	always @(posedge CLK) begin

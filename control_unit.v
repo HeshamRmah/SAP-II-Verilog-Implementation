@@ -168,11 +168,11 @@ module control_unit (
 						ADD_C : case (state) // 2- ADD_C
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C5808 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259500C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
@@ -182,11 +182,11 @@ module control_unit (
 						ANA_B : case (state) // 3- ANA_B
 							
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C7008;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259502C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 
@@ -196,11 +196,11 @@ module control_unit (
 						ANA_C : case (state) // 4- ANA_C
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C5808;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259502C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
@@ -306,11 +306,11 @@ module control_unit (
 						CMA : case (state) // 7- CMA
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25D5008;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h25950DC ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
@@ -320,11 +320,11 @@ module control_unit (
 						DCR_A : case (state) // 8- DCR_A
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25E5008;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259504C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
@@ -334,11 +334,11 @@ module control_unit (
 						DCR_B : case (state) // 9- DCR_B
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C7008 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259504C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
@@ -348,11 +348,11 @@ module control_unit (
 						DCR_C : case (state) // 10- DCR_C
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C5808 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259504C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
@@ -362,15 +362,15 @@ module control_unit (
 						HLT : case (state) // 11- HLT
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25D5008 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h25D5008 ;
 								end
 							
 								T05: begin
-									CON <= 0 ;
+									CON <= 28'h25D5008 ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
@@ -823,11 +823,11 @@ module control_unit (
 						NOP : case (state) // 30- NOP
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25D5008 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h25D5008 ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
@@ -837,11 +837,11 @@ module control_unit (
 						ORA_B : case (state) // 31- ORA_B
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C7008 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259503C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
@@ -851,11 +851,11 @@ module control_unit (
 						ORA_C : case (state) // 32- ORA_C
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C5808 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259503C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 							
@@ -1045,11 +1045,11 @@ module control_unit (
 						SUB_B : case (state) // 39- SUB_B
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C7008 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259501C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
@@ -1059,11 +1059,11 @@ module control_unit (
 						SUB_C : case (state) // 40- SUB_C
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C5808 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259501C;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
@@ -1073,11 +1073,11 @@ module control_unit (
 						XRA_B : case (state) // 41- XRA_B
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C7008 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259506C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
@@ -1087,15 +1087,15 @@ module control_unit (
 						XRA_C : case (state) // 42- XRA_C
 
 								T03: begin
-									CON <= 0 ;
+									CON <= 28'h25C5808 ;
 								end
 							
 								T04: begin
-									CON <= 0 ;
+									CON <= 28'h259506C ;
 									nCLR_state <= 1'b0;  // Reset The Ring Counter
 								end
 								
-								default: CON <= 28'h25D5008 ;
+								default: CON <= 28'h259506C ;
 							endcase
 							
 						XRI : case (state) // 43- XRI
