@@ -32,7 +32,7 @@ module tmp_register (
 	assign WBUS = (Et)? tmpreg : High_Impedance;  // if Enabe == 1 -> Out to WBUS
 	assign alu = tmpreg ;
 
-	always @(posedge CLK ) begin
+	always @(negedge CLK ) begin
 	
 		if(!nLt) tmpreg <= WBUS ;     // Load Data to Register
 		

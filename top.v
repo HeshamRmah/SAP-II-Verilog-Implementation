@@ -52,8 +52,9 @@ module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK
 	// Connection Between Memory and MDR
 	wire [7:0] mem_mdr;
 /************************************************************************/	
-	parameter Zero_State = 8'b0000_0000;
-	// WBUS
+	parameter Zero_State     = 8'b0000_0000;
+	parameter High_Impedance = 8'bzzzz_zzzz;
+	// WBUS Register
 	reg  [15:0] WBUS; 
 	initial begin
 		WBUS <= Zero_State;
@@ -73,7 +74,16 @@ module top (output [7:0] P3_out,output serial_out,input [7:0] Keyboard,input CLK
 		WBUS = (Ei2) ? P2_BUS   : WBUS [7:0];
 		
 	end
-	// assign all (26) Control Signals to CON Vector
+	
+	// Assign each Module input to WBUS when Loading is Selected
+	assign pc_BUS   = (!nLp)? WBUS       : {High_Impedance,High_Impedance} ;
+	assign acc_BUS  = (!nLa)? WBUS [7:0] : High_Impedance ;
+	assign mdr_BUS  = (!nLm)? WBUS [7:0] : High_Impedance ;
+	assign tmp_BUS  = (!nLt)? WBUS [7:0] : High_Impedance ;
+	assign Breg_BUS = (!nLb)? WBUS [7:0] : High_Impedance ;
+	assign Creg_BUS = (!nLc)? WBUS [7:0] : High_Impedance ;
+
+	// Assign all (28) Control Signals to CON Vector
 	assign {Cp,Ep,nLp,CE,Em,nLm,Er,nLr,nLi,nLa,Ea,nLt,Et,nLb,Eb,nLc,Ec,Lo3,Lo4,Sr,Sel3,Sel2,Sel1,Sel0,nLw,Eu,Ei1,Ei2} = CON[27:0] ;
 	
 /*********************************************************************************/

@@ -35,7 +35,7 @@ module accumulator(
 
 	assign alu  = accreg ;
 
-	always @(posedge CLK ) begin
+	always @(negedge CLK ) begin
 	
 		if(!nLa) accreg <= WBUS ;   // Load Data to Register
 		
