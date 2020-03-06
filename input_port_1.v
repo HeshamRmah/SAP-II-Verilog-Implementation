@@ -37,13 +37,16 @@ module input_port_1 (
 	
 	always@(posedge CLK) begin
 	
-		data <= Keyboard;			    // store_input_from_keyboard_into_data_register
+		data <= Keyboard;			        // store_input_from_keyboard_into_data_register
 	
-		if(~nCLR)           data  <= 0;             // clear_condition
+		if(~nCLR)           data  <= 0;     // clear_condition
 	
-		else if(acknowedge) ready <= 1'b1;          // readybit_enable
+		else if(acknowedge) ready <= 1'b1;  // readybit_enable
 	
-		else                data  <= data;          // general
+		else begin                          // general
+			data  = data;
+			ready <= 1'b0;
+		end           
 	
 	end
 
@@ -65,6 +68,7 @@ module t_input_port_1 ;
 	     nCLR = 0; acknowedge = 0;  Ei1 = 0;  Keyboard = 8'hac;
 	#100 nCLR = 1; acknowedge = 1;  Ei1 = 0;  Keyboard = 8'hac; 
 	#100 nCLR = 1; acknowedge = 0;  Ei1 = 1;  Keyboard = 8'hab; 
+	#100 nCLR = 1; acknowedge = 0;  Ei1 = 1;  Keyboard = 8'had; 
 		
 	end
 
